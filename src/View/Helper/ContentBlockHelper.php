@@ -32,7 +32,7 @@ class ContentBlockHelper extends Helper
         $block = $found[0];
 
         if ($expectedType && $block->content_type !== $expectedType) {
-            throw new \InvalidArgumentException("Content block '" . $key . "' type is '" . $block->content_type . "', expeted it to be an '" . $expectedType . "'.");
+            throw new \InvalidArgumentException("Content block '" . $key . "' type is '" . $block->content_type . "', expected it to be an '" . $expectedType . "'.");
         }
 
         return $block;
