@@ -1,0 +1,53 @@
+.content-blocks--list-subheading {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.content-blocks--list-group {
+    list-style: none;
+}
+
+.content-blocks--list-group-item {
+    border: solid 1px lightgrey;
+    margin: 0 0 -1px;
+    padding: 1em;
+    display: flex;
+}
+
+.content-blocks--display-name {
+
+}
+
+.content-blocks--form-heading {
+    margin-bottom: 0;
+}
+
+.content-blocks--form-description {
+    margin-bottom: 1em;
+    color: #aaa;
+}
+
+.content-blocks--description {
+    color: #aaa;
+}
+
+.content-blocks--text {
+    flex-grow: 1
+}
+
+.content-blocks--form-actions {
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.content-blocks--actions {
+
+}
+
+.content-blocks--image-preview {
+    max-width: 400px;
+    max-height: 400px;
+    margin: 2em 0;
+}
