@@ -12,35 +12,34 @@ class ContentBlocksMigration extends AbstractMigration {
      * @return void
      */
     public function up(): void {
-        // This table contains the key-value pairs for ContentBlock components.
-        // Note: that strings like "page", "key", "value" are actually MySQL reserved words
-        // so you shouldn't use them as column names but something else rather.
         $this->table('content_blocks', ['id' => false, 'primary_key' => ['id']])
-            ->addColumn('id', 'uuid', [
-                'limit' => null,
-                'null' => false,
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
             ])
             ->addColumn('parent', 'string', [
                 'limit' => 128,
                 'null' => false,
             ])
-            ->addColumn('display_name', 'string', [
+            // Would prefer this to be 'key', but that is a reserved word for MySQL and likely other DBs.
+            ->addColumn('slug', 'string', [
+                'limit' => 128,
+                'null' => false,
+            ])
+            ->addColumn('label', 'string', [
                 'null' => false,
             ])
             ->addColumn('description', 'string', [
                 'null' => false,
             ])
-            ->addColumn('hint', 'string', [
-                'limit' => 128,
-                'null' => false,
-            ])
-            ->addColumn('content_type', 'string', [
+            ->addColumn('type', 'string', [
                 'limit' => 32,
                 'null' => false,
             ])
-            ->addColumn('content_value', 'text', [
+            // Would prefer this to be 'value', but that is a reserved word for MySQL and likely other DBs.
+            ->addColumn('value', 'text', [
                 'limit' => null,
-                'null' => false,
+                'null' => true,
+                'default' => null,
             ])
             ->addColumn('previous_value', 'text', [
                 'limit' => null,

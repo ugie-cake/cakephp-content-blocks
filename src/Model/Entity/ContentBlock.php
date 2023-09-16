@@ -10,9 +10,9 @@ use Cake\ORM\Entity;
  *
  * @property string $id
  * @property string $parent
- * @property string $hint
- * @property string $content_type
- * @property string $content_value
+ * @property string $slug
+ * @property string $type
+ * @property string $value
  * @property string|null $previous_value
  * @property \Cake\I18n\FrozenTime $modified
  */
@@ -28,12 +28,7 @@ class ContentBlock extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
-        'parent' => true,
-        'hint' => true,
-        'content_type' => true,
-        'content_value' => true,
-        'previous_value' => true,
-        'modified' => true,
+        'value' => true,
     ];
 
     /**
@@ -41,6 +36,6 @@ class ContentBlock extends Entity
      * @return string Display field
      */
     protected function _getDisplayField() {
-        return $this->parent . '/' . $this->hint . ' (' . $this->content_type . ')';
+        return $this->parent . '/' . $this->slug . ' (' . $this->type . ')';
     }
 }

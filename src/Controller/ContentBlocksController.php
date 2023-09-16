@@ -52,31 +52,33 @@ class ContentBlocksController extends AppController {
         ]);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            if ($contentBlock->content_type === 'image') {
+            if ($contentBlock->type === 'image') {
 
-                $file = $this->request->getUploadedFile('content_value');
-                $uploadedPath = $this->uploadFile($file, $contentBlock->hint);
+                $file = $this->request->getUploadedFile('value');
+                $uploadedPath = $this->uploadFile($file, $contentBlock->slug);
 
                 if (!$uploadedPath) {
                     $this->Flash->error('Your image could not be uploaded. Please try again, or select a different image.');
                     return $this->redirect(['action' => 'edit', $id]);
                 }
 
-                $contentBlock->content_value = $uploadedPath;
+                $contentBlock->value = $uploadedPath;
 
-            } else if ($contentBlock->content_type === 'text') {
+            } else if ($contentBlock->type === 'text') {
 
-                $contentBlock->content_value = htmlentities($this->request->getData('content_value'));
+                $contentBlock->value = htmlentities($this->request->getData('value'));
 
-            } else if ($contentBlock->content_type === 'html') {
+            } else if ($contentBlock->type === 'html') {
 
-                $contentBlock->content_value = $this->request->getData('content_value');
+                // Sanitize the input to make it safe from XSS vulnerabilities.
+                $html = \HTMLPurifier::getInstance()->purify($this->request->getData('value'));
+                $contentBlock->value = $html;
 
             }
 
-            // Update previous_value when content_value field has been updated
-            if ($contentBlock->isDirty('content_value'))
-                $contentBlock->previous_value = $contentBlock->getOriginal('content_value');
+            // Update previous_value when value field has been updated
+            if ($contentBlock->isDirty('value'))
+                $contentBlock->previous_value = $contentBlock->getOriginal('value');
 
             if ($this->ContentBlocks->save($contentBlock)) {
                 $this->Flash->success(__('The content block has been saved.'));
@@ -155,8 +157,8 @@ class ContentBlocksController extends AppController {
         $this->request->allowMethod(['post', 'delete']);
         $contentBlock = $this->ContentBlocks->get($id);
 
-        // Restore previous_value to content_value, then clear the previous_value field
-        $contentBlock->content_value = $contentBlock->previous_value;
+        // Restore previous_value to value, then clear the previous_value field
+        $contentBlock->value = $contentBlock->previous_value;
         $contentBlock->previous_value = null;
 
         if ($this->ContentBlocks->save($contentBlock)) {

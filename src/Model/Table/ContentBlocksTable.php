@@ -59,21 +59,21 @@ class ContentBlocksTable extends Table
             ->notEmptyString('parent');
 
         $validator
-            ->scalar('hint')
-            ->maxLength('hint', 128)
-            ->requirePresence('hint', 'create')
-            ->notEmptyString('hint');
+            ->scalar('slug')
+            ->maxLength('slug', 256)
+            ->requirePresence('slug', 'create')
+            ->notEmptyString('slug');
 
         $validator
-            ->scalar('content_type')
-            ->maxLength('content_type', 32)
-            ->requirePresence('content_type', 'create')
-            ->notEmptyString('content_type');
+            ->scalar('type')
+            ->maxLength('type', 32)
+            ->requirePresence('type', 'create')
+            ->notEmptyString('type');
 
         $validator
-            ->scalar('content_value')
-            ->requirePresence('content_value', 'create')
-            ->notEmptyString('content_value');
+            ->scalar('value')
+            ->requirePresence('value', 'create')
+            ->notEmptyString('value');
 
         return $validator;
     }

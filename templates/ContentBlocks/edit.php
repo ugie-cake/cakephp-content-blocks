@@ -2,7 +2,6 @@
 /**
  * @var \App\View\AppView $this
  * @var \ContentBlocks\Model\Entity\ContentBlock $contentBlock
- * @var string[] $content_types
  */
 
 $this->assign('title', 'Edit Content Block - Content Blocks');
@@ -23,7 +22,7 @@ $this->Html->css('ContentBlocks.content-blocks', ['block' => true]);
 
         <div class="contentBlocks form content">
 
-            <h3 class="content-blocks--form-heading"><?= $contentBlock->display_name ?></h3>
+            <h3 class="content-blocks--form-heading"><?= $contentBlock->label ?></h3>
 
             <div class="content-blocks--form-description">
                 <?= $contentBlock->description ?>
@@ -32,14 +31,14 @@ $this->Html->css('ContentBlocks.content-blocks', ['block' => true]);
             <?= $this->Form->create($contentBlock, ['type' => 'file']) ?>
 
             <?php
-            if ($contentBlock->content_type === 'text') {
-                echo $this->Form->control('content_value', [
+            if ($contentBlock->type === 'text') {
+                echo $this->Form->control('value', [
                     'type' => 'text',
-                    'value' => html_entity_decode($contentBlock->content_value),
+                    'value' => html_entity_decode($contentBlock->value),
                     'label' => false,
                 ]);
-            } else if ($contentBlock->content_type === 'html') {
-                echo $this->Form->control('content_value', [
+            } else if ($contentBlock->type === 'html') {
+                echo $this->Form->control('value', [
                     'type' => 'textarea',
                     'label' => false,
                     'id' => 'content-value-input'
@@ -74,13 +73,13 @@ $this->Html->css('ContentBlocks.content-blocks', ['block' => true]);
                     });
                 </script>
                 <?php
-            } else if ($contentBlock->content_type === 'image') {
+            } else if ($contentBlock->type === 'image') {
 
-                if ($contentBlock->content_value) {
-                    echo $this->Html->image($contentBlock->content_value, ['class' => 'content-blocks--image-preview']);
+                if ($contentBlock->value) {
+                    echo $this->Html->image($contentBlock->value, ['class' => 'content-blocks--image-preview']);
                 }
 
-                echo $this->Form->control('content_value', [
+                echo $this->Form->control('value', [
                     'type' => 'file',
                     'accept' => 'image/*',
                     'label' => false,

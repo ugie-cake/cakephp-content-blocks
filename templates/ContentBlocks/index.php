@@ -2,7 +2,6 @@
 /**
  * @var \App\View\AppView $this
  * @var iterable<\ContentBlocks\Model\Entity\ContentBlock> $contentBlocksGrouped
- * @var string[] $content_types
  */
 
 $this->assign('title', 'Content Blocks');
@@ -48,7 +47,7 @@ $slugify = function($text) {
                 <li class="content-blocks--list-group-item">
                     <div class="content-blocks--text">
                         <div class="content-blocks--display-name">
-                            <?= $contentBlock['display_name'] ?>
+                            <?= $contentBlock['label'] ?>
                         </div>
                         <div class="content-blocks--description">
                             <?= $contentBlock['description'] ?>
@@ -56,7 +55,7 @@ $slugify = function($text) {
                     </div>
                     <div class="content-blocks--actions">
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $contentBlock->id]) ?>
-                        <?php if (!empty($contentBlock->previous_value)) echo " :: " . $this->Form->postLink(__('Restore'), ['action' => 'restore', $contentBlock->id], ['confirm' => __("Are you sure you want to restore the previous version for this item?\n{0}/{1}({2})\nNote: You cannot cancel this action!", $contentBlock->parent, $contentBlock->hint, $content_types[$contentBlock->content_type] ?? "Unknown")]) ?>
+                        <?php if (!empty($contentBlock->previous_value)) echo " :: " . $this->Form->postLink(__('Restore'), ['action' => 'restore', $contentBlock->id], ['confirm' => __("Are you sure you want to restore the previous version for this item?\n{0}/{1}\nNote: You cannot cancel this action!", $contentBlock->parent, $contentBlock->slug)]) ?>
                     </div>
                 </li>
             <?php } ?>
