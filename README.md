@@ -6,8 +6,10 @@
     * [Install plugin via composer](#install-plugin-via-composer)
     * [Load the plugin](#load-the-plugin)
     * [Load the View Helper](#load-the-view-helper)
+    * [Create the `content_blocks` table in your database](#create-the-contentblocks-table-in-your-database)
   * [Usage](#usage)
     * [Define content blocks](#define-content-blocks)
+    * [Insert defined content blocks into database](#insert-defined-content-blocks-into-database)
     * [Link to the admin interface](#link-to-the-admin-interface)
     * [Use content blocks in views](#use-content-blocks-in-views)
 * [Reference](#reference)
@@ -68,6 +70,15 @@ Add the following line to the `initialize()` function of your `src/View/AppView.
 
 ```php
 $this->loadHelper('ContentBlocks.ContentBlock');
+```
+
+#### Create the `content_blocks` table in your database
+
+> **NOTE:** This must be done for each environment you deploy your website to (localhost, dev, prod, etc).
+> It also requires you to have setup your `app.php` or `app_local.php` file with an appropriate `Datasources` block to connect to the database.
+
+```
+bin/cake migrations migrate --plugin=ContentBlocks
 ```
 
 ### Usage
