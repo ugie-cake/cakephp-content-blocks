@@ -28,6 +28,12 @@ the logo, title, main content, and footer text. All this with only a few lines o
 
 <img src="./docs/screenshot.png" />
 
+And here is the administration interface for viewing and editing content blocks:
+
+<img src="./docs/screenshot-list.png" />
+
+<img src="./docs/screenshot-block-html.png" />
+
 ## Getting started
 
 ### Setup
@@ -71,7 +77,7 @@ $this->loadHelper('ContentBlocks.ContentBlock');
 Prior to showing content in your templates, you must first define what blocks are available.
 This is done by inserting records into the `content_blocks` table, which is most easily done via [Seeds](https://book.cakephp.org/phinx/0/en/seeding.html).
 
-Here is an example seed to create one content block of each type (`html`, `text`, and `image`):
+Here is an **example** seed to create one content block of each type (`html`, `text`, and `image`):
 
 ```php
 <?php
@@ -86,21 +92,34 @@ class ContentBlocksSeed extends AbstractSeed
         $data = [
             [
                 'parent' => 'global',
-                'key' => 'website-title',
+                'label' => 'Website Title',
+                'description' => 'Shown on the home page, as well as any tabs in the users browser.',
+                'slug' => 'website-title',
                 'type' => 'text',
-                'value' => 'Awesome CakePHP Website',
+                'value' => 'ugie-cake/cakephp-content-blocks-example-app',
             ],
             [
-                'parent' => 'about-us',
-                'key' => 'about-us-content',
-                'type' => 'html',
-                'value' => '<h2>Our History</h2><p>We began in 2023 as a tool to help make CakePHP websites more maintainable.</p>',
+                'parent' => 'global',
+                'label' => 'Logo',
+                'description' => 'Shown in the centre of the home page, and also in the top corner of all administration pages.',
+                'slug' => 'logo',
+                'type' => 'image',
             ],
             [
                 'parent' => 'home',
-                'key' => 'logo',
-                'type' => 'image',
-                'value' => '',
+                'label' => 'Home Page Content',
+                'description' => 'The main content shown in the centre of the home page.',
+                'slug' => 'home-content',
+                'type' => 'html',
+                'value' => '<p>Example app showcasing the <code>ugie-cake/cakephp-content-blocks</code> plugin.</p>',
+            ],
+            [
+                'parent' => 'home',
+                'label' => 'Copyright Message',
+                'description' => 'Copyright information shown at the bottom of the home page.',
+                'slug' => 'copyright-message',
+                'type' => 'text',
+                'value' => '(c) Copyright 2023, enter copyright owner here.',
             ],
         ];
 
@@ -108,7 +127,15 @@ class ContentBlocksSeed extends AbstractSeed
         $table->insert($data)->save();
     }
 }
+```
 
+#### Insert defined content blocks into database
+
+Once you have defined your content blocks in a seed (see above), then you can run the "Seed" to create the records in the database:
+
+```
+# Replace 'ContentBlocksSeed' with the name of your seed class frmo the previous step.
+bin/cake migrations seed --seed ContentBlocksSeed
 ```
 
 #### Link to the admin interface
