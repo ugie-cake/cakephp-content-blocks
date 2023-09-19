@@ -2,10 +2,14 @@
 namespace ContentBlocks\View\Helper;
 
 use Cake\Datasource\FactoryLocator;
+use Cake\Routing\Router;
 use Cake\View\Helper;
 use ContentBlocks\Model\Entity\ContentBlock;
 use ContentBlocks\Model\Table\ContentBlocksTable;
 
+/**
+ * @property Helper\HtmlHelper Html
+ */
 class ContentBlockHelper extends Helper
 {
 
@@ -45,22 +49,28 @@ class ContentBlockHelper extends Helper
      * @param array $options These are passed to the {@link HtmlHelper::image()} function.
      * @return mixed
      */
-    public function image(string $slug, array $options = []): string
+    public function image(string $slug, array $options = []): ?string
     {
-        $block = $this->findOrfail($slug, 'image');
+        $path = $this->imagePath($slug);
 
-        return $this->Html->image($block->value, $options);
+        return $path ? $this->Html->image($path, $options) : null;
     }
 
     /**
-     * Returns the path to a particular image stored as a content block.
+     * Returns the path to a particular image stored as a content block. Will include the path prefix
+     * added by {@link Router::url()}.
      *
-     * Consider using {@link ContentBlockHelper::image()} instead to render a proper <img /> tag.
+     * This is for use in things such as CSS background images.
+     *
+     * Do NOT use this with {@link HtmlHelper::image()}, as that will re-append the path prefix for your project,
+     * resulting in an incorrect URL. If you need to use that, use {@link ContentBlockHelper::image()} instead.
+     *
      * @param string $slug
      * @return string
      */
-    public function imagePath(string $slug): string {
-        return $this->findOrfail($slug, 'image')->value;
+    public function imagePath(string $slug): ?string {
+        $path = $this->findOrfail($slug, 'image')->value;
+        return $path ? Router::url($path) : null;
     }
 
     /**

@@ -143,7 +143,7 @@ class ContentBlocksController extends AppController {
 
         $file->moveTo($destDir->getPathname() . DIRECTORY_SEPARATOR . $newFilename);
 
-        return Router::url('/content-blocks/uploads/' . $newFilename);
+        return '/content-blocks/uploads/' . $newFilename;
     }
 
     /**
