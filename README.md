@@ -145,7 +145,7 @@ class ContentBlocksSeed extends AbstractSeed
 Once you have defined your content blocks in a seed (see above), then you can run the "Seed" to create the records in the database:
 
 ```
-# Replace 'ContentBlocksSeed' with the name of your seed class frmo the previous step.
+# Replace 'ContentBlocksSeed' with the name of your seed class from the previous step.
 bin/cake migrations seed --seed ContentBlocksSeed
 ```
 
