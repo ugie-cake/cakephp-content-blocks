@@ -1,17 +1,16 @@
 # ContentBlocks plugin for CakePHP
 
 <!-- TOC -->
-* [Getting started](#getting-started)
-  * [Setup](#setup)
-    * [Install plugin via composer](#install-plugin-via-composer)
-    * [Load the plugin](#load-the-plugin)
-    * [Load the View Helper](#load-the-view-helper)
-    * [Create the `content_blocks` table in your database](#create-the-contentblocks-table-in-your-database)
-  * [Usage](#usage)
-    * [Define content blocks](#define-content-blocks)
-    * [Insert defined content blocks into database](#insert-defined-content-blocks-into-database)
-    * [Link to the admin interface](#link-to-the-admin-interface)
-    * [Use content blocks in views](#use-content-blocks-in-views)
+* [About](#about)
+* [Usage](#usage)
+  * [Install plugin via composer](#install-plugin-via-composer)
+  * [Load the plugin](#load-the-plugin)
+  * [Load the View Helper](#load-the-view-helper)
+  * [Create the `content_blocks` table in your database](#create-the-contentblocks-table-in-your-database)
+  * [Define content blocks](#define-content-blocks)
+  * [Insert defined content blocks into database](#insert-defined-content-blocks-into-database)
+  * [Link to the admin interface](#link-to-the-admin-interface)
+  * [Use content blocks in views](#use-content-blocks-in-views)
 * [Reference](#reference)
   * [HTML Block](#html-block)
     * [Adding a HTML block](#adding-a-html-block)
@@ -21,6 +20,8 @@
   * [Image Block](#image-block)
     * [Adding an image block](#adding-an-image-block)
 <!-- TOC -->
+
+## About
 
 Make previously-static parts of your website dynamic.
 Allow administrators and end users to edit blocks of content on the website without having to edit template files.
@@ -36,21 +37,17 @@ And here is the administration interface for viewing and editing content blocks:
 
 <img src="./docs/screenshot-block-html.png" />
 
-## Getting started
+## Usage
 
-### Setup
+### Install plugin via composer
 
-The following steps are performed once per app that wishes to use the plugin.
-After it is setup, then you can use the plugin (see [Usage](#usage)).
-
-#### Install plugin via composer
-You can install this plugin into your CakePHP application using [composer](https://getcomposer.org).
+Install this plugin into your CakePHP application using [composer](https://getcomposer.org).
 
 ```
 composer require ugie-cake/cakephp-content-blocks
 ```
 
-#### Load the plugin
+### Load the plugin
 
 You can either use the `cake` CLI:
 
@@ -58,13 +55,13 @@ You can either use the `cake` CLI:
 bin/cake plugin load ContentBlocks
 ```
 
-*or* add the following line to the `bootstrap()` function of your `src/Application.php` file:
+*or* manualy add the following line to the `bootstrap()` function of your `src/Application.php` file:
 
 ```php
 $this->addPlugin('ContentBlocks');
 ```
 
-#### Load the View Helper
+### Load the View Helper
 
 Add the following line to the `initialize()` function of your `src/View/AppView.php` file:
 
@@ -72,7 +69,7 @@ Add the following line to the `initialize()` function of your `src/View/AppView.
 $this->loadHelper('ContentBlocks.ContentBlock');
 ```
 
-#### Create the `content_blocks` table in your database
+### Create the `content_blocks` table in your database
 
 > **NOTE:** This must be done for each environment you deploy your website to (localhost, dev, prod, etc).
 > It also requires you to have setup your `app.php` or `app_local.php` file with an appropriate `Datasources` block to connect to the database.
@@ -81,9 +78,7 @@ $this->loadHelper('ContentBlocks.ContentBlock');
 bin/cake migrations migrate --plugin=ContentBlocks
 ```
 
-### Usage
-
-#### Define content blocks
+### Define content blocks
 
 Prior to showing content in your templates, you must first define what blocks are available.
 This is done by inserting records into the `content_blocks` table, which is most easily done via [Seeds](https://book.cakephp.org/phinx/0/en/seeding.html).
@@ -140,7 +135,7 @@ class ContentBlocksSeed extends AbstractSeed
 }
 ```
 
-#### Insert defined content blocks into database
+### Insert defined content blocks into database
 
 Once you have defined your content blocks in a seed (see above), then you can run the "Seed" to create the records in the database:
 
@@ -149,7 +144,7 @@ Once you have defined your content blocks in a seed (see above), then you can ru
 bin/cake migrations seed --seed ContentBlocksSeed
 ```
 
-#### Link to the admin interface
+### Link to the admin interface
 
 In order for your administrators to be able to access the content blocks admin page,
 your template needs to link to the `ContentBlocks` controller `index` action:
@@ -158,7 +153,7 @@ your template needs to link to the `ContentBlocks` controller `index` action:
 <?= $this->Html->link('Content Blocks', ['plugin' => 'ContentBlocks', 'controller' => 'ContentBlocks', 'action' => 'index']) ?>
 ```
 
-#### Use content blocks in views
+### Use content blocks in views
 
 Instead of hard coding content into views, output relevant content blocks.
 This means that administrators never need to make code changes (or employ someone to make code changes)
@@ -272,7 +267,6 @@ class ImageBlockSeed extends \Migrations\AbstractSeed
                 'label' => 'Logo',
                 'description' => 'Shown on the home page, and also in the top left of each other page.',
                 'type' => 'image',
-                'value' => 'CakePHP Content Blocks Plugin',
             ],
         ];
 

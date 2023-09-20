@@ -11,7 +11,6 @@ class ImageBlockSeed extends \Migrations\AbstractSeed
                 'label' => 'Logo',
                 'description' => 'Shown on the home page, and also in the top left of each other page.',
                 'type' => 'image',
-                'value' => 'CakePHP Content Blocks Plugin',
             ],
         ];
 
