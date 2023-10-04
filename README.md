@@ -167,6 +167,14 @@ This is done using the relevant `ContentBlocksHelper` functions:
 <?= $this->ContentBlock->text('website-title'); ?>
 ```
 
+### Overriding admin page templates
+
+For various reasons, you may want to customise the appearance of the admin pages. If this is the case, you can override the [provided templates](/templates/ContentBlocks) by creating a folder in your CakePHP application's `templates` folder called `plugin` (if you have not already), and creating the path `ContentBlocks/ContentBlocks` (that is, a folder inside a folder) inside the `plugin` folder. The directory structure should look like so:
+
+```
+templates/plugin/ContentBlocks/ContentBlocks/
+```
+
 ## Reference
 
 ### HTML Block
