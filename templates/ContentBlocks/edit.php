@@ -46,30 +46,32 @@ $this->Html->css('ContentBlocks.content-blocks', ['block' => true]);
 
                 ?>
                 <script>
-                    CKSource.Editor.create(
-                        document.getElementById('content-value-input'),
-                        {
-                            toolbar: [
-                                "heading", "|",
-                                "bold", "italic", "underline", "|",
-                                "bulletedList", "numberedList", "|",
-                                "alignment", "blockQuote", "|",
-                                "indent", "outdent", "|",
-                                "link", "|",
-                                "insertTable", "imageInsert", "mediaEmbed", "horizontalLine", "|",
-                                "removeFormat", "|",
-                                "sourceEditing", "|",
-                                "undo", "redo",
-                            ],
-                            simpleUpload: {
-                                uploadUrl: <?= json_encode($this->Url->build(['action' => 'upload'])) ?>,
-                                headers: {
-                                   'X-CSRF-TOKEN': <?= json_encode($this->request->getAttribute('csrfToken')) ?>,
+                    document.addEventListener("DOMContentLoaded", (event) => {
+                        CKSource.Editor.create(
+                            document.getElementById('content-value-input'),
+                            {
+                                toolbar: [
+                                    "heading", "|",
+                                    "bold", "italic", "underline", "|",
+                                    "bulletedList", "numberedList", "|",
+                                    "alignment", "blockQuote", "|",
+                                    "indent", "outdent", "|",
+                                    "link", "|",
+                                    "insertTable", "imageInsert", "mediaEmbed", "horizontalLine", "|",
+                                    "removeFormat", "|",
+                                    "sourceEditing", "|",
+                                    "undo", "redo",
+                                ],
+                                simpleUpload: {
+                                    uploadUrl: <?= json_encode($this->Url->build(['action' => 'upload'])) ?>,
+                                    headers: {
+                                    'X-CSRF-TOKEN': <?= json_encode($this->request->getAttribute('csrfToken')) ?>,
+                                    }
                                 }
                             }
-                        }
-                    ).then(editor => {
-                       console.log(Array.from( editor.ui.componentFactory.names() ));
+                        ).then(editor => {
+                        console.log(Array.from( editor.ui.componentFactory.names() ));
+                        });
                     });
                 </script>
                 <?php
