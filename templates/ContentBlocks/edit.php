@@ -50,6 +50,7 @@ $this->Html->css('ContentBlocks.content-blocks', ['block' => true]);
                     /*
                     Create our CKEditor instance in a DOMContentLoaded event callback, to ensure
                     the library is available when we call `create()`.
+                    Fixes https://github.com/ugie-cake/cakephp-content-blocks/issues/4.
                     */
                     document.addEventListener("DOMContentLoaded", (event) => {
                         CKSource.Editor.create(
