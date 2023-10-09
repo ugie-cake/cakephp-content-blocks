@@ -45,7 +45,12 @@ $this->Html->css('ContentBlocks.content-blocks', ['block' => true]);
                 ]);
 
                 ?>
+                <!-- Load CKEditor. -->
                 <script>
+                    /*
+                    Create our CKEditor instance in a DOMContentLoaded event callback, to ensure
+                    the library is available when we call `create()`.
+                    */
                     document.addEventListener("DOMContentLoaded", (event) => {
                         CKSource.Editor.create(
                             document.getElementById('content-value-input'),
