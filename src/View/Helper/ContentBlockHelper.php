@@ -13,7 +13,7 @@ use ContentBlocks\Model\Table\ContentBlocksTable;
 class ContentBlockHelper extends Helper
 {
 
-    public $helpers = ['Html'];
+    public array $helpers = ['Html'];
 
     /**
      * @var ContentBlocksTable
