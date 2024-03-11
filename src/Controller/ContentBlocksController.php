@@ -47,9 +47,7 @@ class ContentBlocksController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit(string $id = null) {
-        $contentBlock = $this->ContentBlocks->get($id, [
-            'contain' => [],
-        ]);
+        $contentBlock = $this->ContentBlocks->get($id, contain:[]);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             if ($contentBlock->type === 'image') {
@@ -120,6 +118,12 @@ class ContentBlocksController extends AppController {
 
     private function uploadFile(UploadedFileInterface $file, string $filenamePrefix = null) {
         if ($file->getError() !== 0) {
+
+            if ($file->getError() == 1) {
+                $this->Flash->error(__('The file you uploaded is too big'));
+
+            }
+
             return false;
         }
 
