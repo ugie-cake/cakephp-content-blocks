@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace ContentBlocks\Controller;
 
 use App\Controller\AppController;
-use Cake\Routing\RouteBuilder;
-use Cake\Routing\Router;
+use Cake\Core\Configure;
+use Cake\Event\EventInterface;
+use Cake\Log\Log;
 use Psr\Http\Message\UploadedFileInterface;
 
 /**
@@ -15,6 +16,31 @@ use Psr\Http\Message\UploadedFileInterface;
  * @method \ContentBlocks\Model\Entity\ContentBlock[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ContentBlocksController extends AppController {
+
+    /**
+     * Before filter handler.
+     *
+     * @param \Cake\Event\EventInterface $event The event.
+     * @return void
+     * @throws \Cake\Http\Exception\NotFoundException
+     */
+    public function beforeFilter(EventInterface $event)
+    {
+        // If CakePHP Authorization\Authorization plugin is enabled,
+        // ignore it, only if `ContentBlocks.ignoreAuthorization` is set to true
+        $authorizationService = $this->getRequest()->getAttribute('authorization');
+        if ($authorizationService instanceof \Authorization\AuthorizationService) {
+            if (Configure::read('ContentBlocks.ignoreAuthorization')) {
+                $authorizationService->skipAuthorization();
+            } else {
+                Log::info(
+                    'Cake Authorization plugin is enabled. If you would like ' .
+                    'to force ContentBlocks to ignore it, set `ContentBlocks.ignoreAuthorization` ' .
+                    ' Configure option to true.'
+                );
+            }
+        }
+    }
 
     /**
      * Index method
