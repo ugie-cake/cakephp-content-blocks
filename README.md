@@ -11,7 +11,8 @@
   * [Insert defined content blocks into database](#insert-defined-content-blocks-into-database)
   * [Link to the admin interface](#link-to-the-admin-interface)
   * [Use content blocks in views](#use-content-blocks-in-views)
-  * [Overriding admin page templates](https://github.com/ugie-cake/cakephp-content-blocks#overriding-admin-page-templates)
+  * [Overriding admin page templates](#overriding-admin-page-templates)
+  * [Skipping Authorization check](#skipping-authorization-check)
 * [Reference](#reference)
   * [HTML Block](#html-block)
     * [Adding a HTML block](#adding-a-html-block)
@@ -174,6 +175,18 @@ For various reasons, you may want to customise the appearance of the admin pages
 
 ```
 templates/plugin/ContentBlocks/ContentBlocks/
+```
+
+### Skipping Authorization check
+
+You may see error messages such as ``The request to `/content-blocks/content-blocks` did not apply any authorization checks`` if you have implemented [Authorization plugin](https://book.cakephp.org/authorization/3/en/index.html) in your project, but did not add policies required. You may need to skip the authorization check in the `content-blocks` plugin by adding the following configuration key: 
+
+
+```
+// In /config/app_local.php add: 
+'ContentBlocks' => [
+    'ignoreAuthorization' => true,
+]
 ```
 
 ## Reference
