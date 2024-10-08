@@ -80,6 +80,12 @@ class ContentBlocksController extends AppController {
             if ($contentBlock->type === 'image') {
 
                 $file = $this->request->getUploadedFile('value');
+
+                if($file->getClientMediaType() != 'image/jpeg' && $file->getClientMediaType() != 'image/png') {
+                    $this->Flash->error('File could not be uploaded. Only png or jpg files may be uploaded.');
+                    return $this->redirect(['action' => 'edit', $id]);
+                }
+
                 $uploadedPath = $this->uploadFile($file, $contentBlock->slug);
 
                 if (!$uploadedPath) {
