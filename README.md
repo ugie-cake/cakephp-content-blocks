@@ -57,7 +57,7 @@ You can either use the `cake` CLI:
 bin/cake plugin load ContentBlocks
 ```
 
-*or* manualy add the following line to the `bootstrap()` function of your `src/Application.php` file:
+*or* manually add the following line to the `bootstrap()` function of your `src/Application.php` file:
 
 ```php
 $this->addPlugin('ContentBlocks');
