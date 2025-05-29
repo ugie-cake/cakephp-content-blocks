@@ -57,7 +57,23 @@ You can either use the `cake` CLI:
 bin/cake plugin load ContentBlocks
 ```
 
-*or* manualy add the following line to the `bootstrap()` function of your `src/Application.php` file:
+*or* manually add the following:
+
+```php
+// In src/Application.php for CakePHP <= 4.x
+public function bootstrap(): void {
+	// ...
+	// Load more plugins here
+    $this->addPlugin('ContentBlocks');
+}
+
+// In config/plugins.php for CakePHP >= 5.x
+return [
+    // ...
+    // Additional plugins here
+    'ContentBlocks' => [],
+];
+```
 
 ```php
 $this->addPlugin('ContentBlocks');
