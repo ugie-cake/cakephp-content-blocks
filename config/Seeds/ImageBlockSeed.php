@@ -1,6 +1,10 @@
 <?php
+declare(strict_types=1);
+
+use Migrations\BaseSeed;
+
 # File: config/Seeds/ImageBlockSeed.php
-class ImageBlockSeed extends \Migrations\AbstractSeed
+class ImageBlockSeed extends BaseSeed
 {
     public function run(): void
     {

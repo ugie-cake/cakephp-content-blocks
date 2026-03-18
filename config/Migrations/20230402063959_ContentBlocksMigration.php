@@ -1,17 +1,20 @@
 <?php
 declare(strict_types=1);
 
-use Migrations\AbstractMigration;
+use Migrations\BaseMigration;
 
-class ContentBlocksMigration extends AbstractMigration {
+class ContentBlocksMigration extends BaseMigration
+{
     /**
      * Up Method.
      *
      * More information on this method is available here:
      * https://book.cakephp.org/phinx/0/en/migrations.html#the-up-method
+     *
      * @return void
      */
-    public function up(): void {
+    public function up(): void
+    {
         $this->table('content_blocks', ['id' => false, 'primary_key' => ['id']])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
@@ -59,9 +62,11 @@ class ContentBlocksMigration extends AbstractMigration {
      *
      * More information on this method is available here:
      * https://book.cakephp.org/phinx/0/en/migrations.html#the-down-method
+     *
      * @return void
      */
-    public function down(): void {
+    public function down(): void
+    {
         $this->table('content_blocks')->drop()->save();
     }
 }

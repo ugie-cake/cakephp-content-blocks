@@ -1,6 +1,10 @@
 <?php
+declare(strict_types=1);
+
+use Migrations\BaseSeed;
+
 # File: config/Seeds/TextBlockSeed.php
-class TextBlockSeed extends \Migrations\AbstractSeed
+class TextBlockSeed extends BaseSeed
 {
     public function run(): void
     {

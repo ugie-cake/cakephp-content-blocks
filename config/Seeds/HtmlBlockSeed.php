@@ -1,6 +1,10 @@
 <?php
+declare(strict_types=1);
+
+use Migrations\BaseSeed;
+
 # File: config/Seeds/HtmlBlockSeed.php
-class HtmlBlockSeed extends \Migrations\AbstractSeed
+class HtmlBlockSeed extends BaseSeed
 {
     public function run(): void
     {
