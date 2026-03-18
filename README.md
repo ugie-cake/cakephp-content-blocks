@@ -107,9 +107,9 @@ Here is an **example** seed to create one content block of each type (`html`, `t
 <?php
 declare(strict_types=1);
 
-use Migrations\AbstractSeed;
+use Migrations\BaseSeed;
 
-class ContentBlocksSeed extends AbstractSeed
+class ContentBlocksSeed extends BaseSeed
 {
     public function run(): void
     {
@@ -159,7 +159,7 @@ Once you have defined your content blocks in a seed (see above), then you can ru
 
 ```
 # Replace 'ContentBlocksSeed' with the name of your seed class from the previous step.
-bin/cake migrations seed --seed ContentBlocksSeed
+bin/cake seeds run ContentBlocksSeed
 ```
 
 ### Link to the admin interface
@@ -219,7 +219,7 @@ An [example seed can be found in the `HtmlBlockSeed.php` file](./config/Seeds/Ht
 ```php
 <?php
 # File: config/Seeds/HtmlBlockSeed.php
-class HtmlBlockSeed extends \Migrations\AbstractSeed
+class HtmlBlockSeed extends \Migrations\BaseSeed
 {
     public function run(): void
     {
@@ -262,7 +262,7 @@ An [example seed can be found in the `TextBlockSeed.php` file](./config/Seeds/Te
 ```php
 <?php
 # File: config/Seeds/TextBlockSeed.php
-class TextBlockSeed extends \Migrations\AbstractSeed
+class TextBlockSeed extends \Migrations\BaseSeed
 {
     public function run(): void
     {
@@ -294,7 +294,7 @@ An [example seed can be found in the `ImageBlockSeed.php` file](./config/Seeds/I
 ```php
 <?php
 # File: config/Seeds/ImageBlockSeed.php
-class ImageBlockSeed extends \Migrations\AbstractSeed
+class ImageBlockSeed extends \Migrations\BaseSeed
 {
     public function run(): void
     {
